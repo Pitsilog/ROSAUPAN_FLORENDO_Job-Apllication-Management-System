@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIMPLADO Recruitment Management</title>
+
+<style>
+:root {
+  --wine: #8e080d;
+  --dark-wine: #650005;
+  --red: #b30812;
+  --gold: #ffbf26;
+  --cream: #fffaf0;
+  --line: #ecd39a;
+  --green: #4b9d4c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--cream);
+  color: #342b29;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+header {
+  background: var(--cream);
+  padding: 20px 30px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h2 {
+  color: var(--wine);
+  margin: 0;
+}
+
+.layout {
+  display: flex;
+  min-height: calc(100vh - 75px);
+}
+
+.sidebar {
+  background: var(--wine);
+  color: white;
+  width: 235px;
+  padding: 25px 14px;
+  flex-shrink: 0;
+}
+
+.logo {
+  text-align: center;
+  color: var(--gold);
+  margin-bottom: 35px;
+}
+
+.logo h2 {
+  font-size: 21px;
+}
+
+.nav-button {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 8px;
+  text-align: left;
+  color: white;
+  background: transparent;
+  border: none;
+  border-radius: 9px;
+}
+
+.nav-button:hover,
+.nav-button.active {
+  background: #b32128;
+}
+
+main {
+  flex: 1;
+  min-width: 0;
+  padding: 28px;
+}
+
+.page-title {
+  color: var(--wine);
+  font-size: 34px;
+  margin: 0 0 8px;
+}
+
+.subtitle {
+  margin-bottom: 28px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+.stat, .panel {
+  background: #fffdf8;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.stat small {
+  color: #947000;
+  text-transform: uppercase;
+}
+
+.stat h2 {
+  color: var(--wine);
+  font-size: 30px;
+  margin: 12px 0 5px;
+}
+
+.panel {
+  margin-bottom: 20px;
+}
+
+.panel h2 {
+  color: var(--wine);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+input, select, textarea {
+  border: 1px solid #e3cfaa;
+  border-radius: 8px;
+  padding: 11px;
+  background: #fffdfa;
+  width: 100%;
+}
+
+textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.btn {
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 10px 17px;
+  background: transparent;
+  color: var(--wine);
+}
+
+.btn-primary {
+  background: var(--red);
+  color: white;
+  border: none;
+}
+
+.btn-danger {
+  color: #b30812;
+  border: 1px solid #e9b4b4;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background: #fbf4e2;
+  color: var(--wine);
+  text-align: left;
+  padding: 14px 10px;
+}
+
+td {
+  padding: 13px 10px;
+  border-bottom: 1px solid #eadcc4;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.status {
+  display: inline-block;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 12px;
+  background: #fff0b7;
+}
+
+.status.HIRED {
+  background: #ccebc9;
+}
+
+.status.INTERVIEW {
+  background: #cce3ff;
+}
+
+.status.REJECTED {
+  background: #dedddb;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.field {
+  margin-bottom: 14px;
+}
+
+.field label {
+  display: block;
+  color: var(--wine);
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#message {
+  padding: 10px 0;
+  color: var(--green);
+}
+
+footer {
+  text-align: right;
+  color: #b8860b;
+  font-style: italic;
+  padding: 15px;
+}
+
+@media (max-width: 850px) {
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sidebar {
+    width: 175px;
+  }
+
+  main {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .layout {
+    display: block;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .nav-button {
+    display: inline-block;
+    width: 48%;
+  }
+
+  .stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  header {
+    padding: 15px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>♧ SIMPLADO RESTAURANT</h2>
+  <span>Recruitment Management System</span>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="logo">
+      <h2>♧ SIMPLADO </h2>
+      <small>Good Food · Great People</small>
+    </div>
+
+    <button class="nav-button active"
+      onclick="showPage('dashboard', this)">⌂ Dashboard</button>
+
+    <button class="nav-button"
+      onclick="showPage('positions', this)">▣ Job Positions</button>
+
+    <button class="nav-button"
+      onclick="showPage('applicants', this)">♙ Applicants</button>
+
+    <button class="nav-button"
+      onclick="showPage('interviews', this)">▦ Interview Schedule</button>
+
+    <button class="nav-button"
+      onclick="showPage('portal', this)">♧ Applicant Portal</button>
+  </aside>
+
+  <main>
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="page">
+      <h1 class="page-title">Recruitment Management</h1>
+      <p class="subtitle">Find the right people. Build a stronger team.</p>
+
+      <div class="stats">
+        <div class="stat">
+          <small>Total Applicants</small>
+          <h2 id="totalApplicants">0</h2>
+        </div>
+
+        <div class="stat">
+          <small>Job Positions</small>
+          <h2 id="totalPositions">0</h2>
+        </div>
+
+        <div class="stat">
+          <small>Interviews</small>
+          <h2 id="totalInterviews">0</h2>
+        </div>
+
+        <div class="stat">
+          <small>Hired</small>
+          <h2 id="totalHired">0</h2>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <h2>Recent Applicants</h2>
+          <input id="dashboardSearch" placeholder="Search applicants..."
+            style="max-width:250px" oninput="renderApplicants()">
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="dashboardApplicants"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOB POSITIONS -->
+    <section id="positions" class="page hidden">
+      <h1 class="page-title">Job Positions</h1>
+      <p class="subtitle">Manage available opportunities at SIMPLADO.</p>
+
+      <div class="panel">
+        <h2>Add Job Position</h2>
+        <form id="positionForm">
+          <div class="form-grid">
+            <div class="field">
+              <label>Position Title</label>
+              <input name="title" required placeholder="e.g. Head Cook">
+            </div>
+
+            <div class="field">
+              <label>Department</label>
+              <input name="department" required placeholder="e.g. Kitchen">
+            </div>
+
+            <div class="field">
+              <label>Employment Type</label>
+              <select name="type">
+                <option>Full-time</option>
+                <option>Part-time</option>
+                <option>Contract</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Available Slots</label>
+              <input name="slots" type="number" min="1" value="1" required>
+            </div>
+
+            <div class="field">
+              <label>Status</label>
+              <select name="status">
+                <option>Open</option>
+                <option>Closed</option>
+              </select>
+            </div>
+          </div>
+
+          <button class="btn btn-primary">Add Position</button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <h2>Available Positions</h2>
+          <input id="positionSearch" placeholder="Search positions..."
+            style="max-width:250px" oninput="renderPositions()">
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Position</th>
+                <th>Department</th>
+                <th>Type</th>
+                <th>Slots</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="positionsTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPLICANTS -->
+    <section id="applicants" class="page hidden">
+      <h1 class="page-title">Applicants</h1>
+      <p class="subtitle">Manage applicant information and application status.</p>
+
+      <div class="panel">
+        <h2 id="applicantFormTitle">Add Applicant</h2>
+
+        <form id="applicantForm">
+          <input type="hidden" name="id">
+
+          <div class="form-grid">
+            <div class="field">
+              <label>Full Name</label>
+              <input name="name" required placeholder="Applicant name">
+            </div>
+
+            <div class="field">
+              <label>Email Address</label>
+              <input name="email" type="email" required
+                placeholder="applicant@email.com">
+            </div>
+
+            <div class="field">
+              <label>Applied Position</label>
+              <select name="position" id="applicantPosition" required></select>
+            </div>
+
+            <div class="field">
+              <label>Status</label>
+              <select name="status">
+                <option>APPLIED</option>
+                <option>INTERVIEW</option>
+                <option>HIRED</option>
+                <option>REJECTED</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Age</label>
+              <input name="age" type="number" min="15" max="100" value="18">
+            </div>
+
+            <div class="field">
+              <label>Experience</label>
+              <input name="experience" placeholder="e.g. 2 years">
+            </div>
+
+            <div class="field">
+              <label>Education</label>
+              <input name="education" placeholder="Educational background">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Professional Background</label>
+            <textarea name="background"
+              placeholder="Skills, previous roles, and specialties"></textarea>
+          </div>
+
+          <button class="btn btn-primary" id="saveApplicantButton">
+            Save Applicant
+          </button>
+          <button type="button" class="btn" onclick="resetApplicantForm()">
+            Clear
+          </button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <h2>Applicant Records</h2>
+          <input id="applicantSearch" placeholder="Search applicants..."
+            style="max-width:250px" oninput="renderApplicants()">
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Status</th>
+                <th>Age</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="applicantsTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERVIEWS -->
+    <section id="interviews" class="page hidden">
+      <h1 class="page-title">Interview Schedule</h1>
+      <p class="subtitle">Schedule and manage applicant interviews.</p>
+
+      <div class="panel">
+        <h2>Schedule Interview</h2>
+
+        <form id="interviewForm">
+          <div class="form-grid">
+            <div class="field">
+              <label>Applicant</label>
+              <select name="applicantId" id="interviewApplicant" required></select>
+            </div>
+
+            <div class="field">
+              <label>Interview Date</label>
+              <input type="date" name="date" required>
+            </div>
+
+            <div class="field">
+              <label>Interview Time</label>
+              <input type="time" name="time" required>
+            </div>
+
+            <div class="field">
+              <label>Interviewer</label>
+              <input name="interviewer" required placeholder="Interviewer name">
+            </div>
+
+            <div class="field">
+              <label>Location</label>
+              <input name="location" placeholder="e.g. Main Office">
+            </div>
+          </div>
+
+          <button class="btn btn-primary">Save Interview</button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h2>Scheduled Interviews</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Applicant</th>
+                <th>Position</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Interviewer</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="interviewsTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPLICANT PORTAL -->
+    <section id="portal" class="page hidden">
+      <h1 class="page-title">Applicant Portal</h1>
+      <p class="subtitle">View an applicant's application progress.</p>
+
+      <div class="panel">
+        <div class="field">
+          <label>Select Applicant</label>
+          <select id="portalApplicant" onchange="renderPortal()"></select>
+        </div>
+      </div>
+
+      <div id="portalDetails"></div>
+    </section>
+
+    <p id="message"></p>
+    <footer>♧ Good People · Serve Great Food</footer>
+  </main>
+</div>
+
+<script>
+// ==========================================
+// SIMPLADO RECRUITMENT MANAGEMENT SYSTEM
+// JavaScript + JSON + CRUD
+// ==========================================
+
+// READ JSON data saved in localStorage.
+const defaultData = {
+  applicants: [
+    {
+      id: 1,
+      name: "Juan Dela Cruz",
+      email: "juan@example.com",
+      position: "Head Cook",
+      status: "HIRED",
+      age: 28,
+      experience: "5 years",
+      education: "Culinary Arts",
+      background: "Experienced in food preparation."
+    },
+    {
+      id: 2,
+      name: "Maria Santos",
+      email: "maria@example.com",
+      position: "Kitchen Helper",
+      status: "INTERVIEW",
+      age: 25,
+      experience: "3 years",
+      education: "Senior High School",
+      background: "Experienced in kitchen sanitation."
+    }
+  ],
+
+  positions: [
+    {
+      id: 1,
+      title: "Head Cook",
+      department: "Kitchen",
+      type: "Full-time",
+      slots: 1,
+      status: "Open"
+    },
+    {
+      id: 2,
+      title: "Kitchen Helper",
+      department: "Kitchen",
+      type: "Full-time",
+      slots: 3,
+      status: "Open"
+    }
+  ],
+
+  interviews: []
+};
+
+let db;
+
+try {
+  db = JSON.parse(localStorage.getItem("simpladoData")) || defaultData;
+} catch (error) {
+  db = defaultData;
+}
+
+let nextApplicantId = Math.max(0, ...db.applicants.map(a => a.id)) + 1;
+let nextPositionId = Math.max(0, ...db.positions.map(p => p.id)) + 1;
+let nextInterviewId = Math.max(0, ...db.interviews.map(i => i.id)) + 1;
+
+// SAVE: Convert JavaScript objects and arrays into JSON.
+function saveData() {
+  localStorage.setItem("simpladoData", JSON.stringify(db));
+  updateDashboard();
+  refreshSelects();
+}
+
+// Escape user input before inserting it into HTML.
+function esc(value) {
+  return String(value ?? "").replace(/[&<>"']/g, character => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[character]);
+}
+
+function notify(message) {
+  document.getElementById("message").textContent = message;
+
+  setTimeout(() => {
+    document.getElementById("message").textContent = "";
+  }, 3000);
+}
+
+// PAGE NAVIGATION
+function showPage(pageId, button) {
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.add("hidden");
+  });
+
+  document.getElementById(pageId).classList.remove("hidden");
+
+  document.querySelectorAll(".nav-button").forEach(item => {
+    item.classList.remove("active");
+  });
+
+  if (button) button.classList.add("active");
+
+  renderAll();
+}
+
+// DASHBOARD
+function updateDashboard() {
+  document.getElementById("totalApplicants").textContent =
+    db.applicants.length;
+
+  document.getElementById("totalPositions").textContent =
+    db.positions.filter(p => p.status === "Open").length;
+
+  document.getElementById("totalInterviews").textContent =
+    db.interviews.length;
+
+  document.getElementById("totalHired").textContent =
+    db.applicants.filter(a => a.status === "HIRED").length;
+}
+
+// CREATE AND UPDATE APPLICANT
+document.getElementById("applicantForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);
+  const data = Object.fromEntries(formData.entries());
+  const id = Number(data.id);
+
+  if (!db.positions.some(p => p.title === data.position)) {
+    notify("Please select a valid job position.");
+    return;
+  }
+
+  const record = {
+    id: id || nextApplicantId++,
+    name: data.name.trim(),
+    email: data.email.trim(),
+    position: data.position,
+    status: data.status,
+    age: Number(data.age) || 18,
+    experience: data.experience.trim(),
+    education: data.education.trim(),
+    background: data.background.trim()
+  };
+
+  if (id) {
+    // UPDATE existing record.
+    db.applicants = db.applicants.map(a =>
+      a.id === id ? record : a
+    );
+
+    notify("Applicant updated successfully!");
+  } else {
+    // CREATE new record.
+    db.applicants.push(record);
+
+    notify("Applicant added successfully!");
+  }
+
+  saveData();
+  resetApplicantForm();
+  renderAll();
+});
+
+// READ AND DISPLAY APPLICANTS
+function renderApplicants() {
+  const search = (
+    document.getElementById("applicantSearch")?.value ||
+    document.getElementById("dashboardSearch")?.value ||
+    ""
+  ).toLowerCase();
+
+  const filtered = db.applicants.filter(a =>
+    a.name.toLowerCase().includes(search) ||
+    a.position.toLowerCase().includes(search) ||
+    a.status.toLowerCase().includes(search)
+  );
+
+  const rows = filtered.map(a => `
+    <tr>
+      <td>${esc(a.name)}</td>
+      <td>${esc(a.position)}</td>
+      <td><span class="status ${esc(a.status)}">${esc(a.status)}</span></td>
+      <td>${esc(a.age)}</td>
+      <td>
+        <button class="btn" onclick="editApplicant(${a.id})">Edit</button>
+        <button class="btn btn-danger" onclick="deleteApplicant(${a.id})">Delete</button>
+        <button class="btn" onclick="quickStatus(${a.id})">Status</button>
+      </td>
+    </tr>
+  `).join("");
+
+  document.getElementById("applicantsTable").innerHTML =
+    rows || '<tr><td colspan="5">No applicants found.</td></tr>';
+
+  document.getElementById("dashboardApplicants").innerHTML =
+    filtered.map(a => `
+      <tr>
+        <td>${esc(a.name)}</td>
+        <td>${esc(a.position)}</td>
+        <td><span class="status ${esc(a.status)}">${esc(a.status)}</span></td>
+        <td>
+          <button class="btn btn-danger"
+            onclick="deleteApplicant(${a.id})">Delete</button>
+        </td>
+      </tr>
+    `).join("") || '<tr><td colspan="4">No applicants found.</td></tr>';
+}
+
+// UPDATE: Load applicant information into the form.
+function editApplicant(id) {
+  const a = db.applicants.find(item => item.id === id);
+  if (!a) return;
+
+  const form = document.getElementById("applicantForm");
+
+  Object.keys(a).forEach(key => {
+    if (form.elements[key]) {
+      form.elements[key].value = a[key] ?? "";
+    }
+  });
+
+  document.getElementById("applicantFormTitle").textContent =
+    "Edit Applicant";
+
+  document.getElementById("saveApplicantButton").textContent =
+    "Update Applicant";
+
+  form.scrollIntoView({ behavior: "smooth" });
+}
+
+// DELETE applicant and related interviews.
+function deleteApplicant(id) {
+  const applicant = db.applicants.find(a => a.id === id);
+  if (!applicant) return;
+
+  if (!confirm(`Delete ${applicant.name}?`)) return;
+
+  db.applicants = db.applicants.filter(a => a.id !== id);
+
+  db.interviews = db.interviews.filter(i => i.applicantId !== id);
+
+  saveData();
+  renderAll();
+  notify("Applicant deleted successfully.");
+}
+
+// Change status quickly.
+function quickStatus(id) {
+  const a = db.applicants.find(item => item.id === id);
+  if (!a) return;
+
+  const status = prompt(
+    "Enter APPLIED, INTERVIEW, HIRED, or REJECTED:",
+    a.status
+  );
+
+  if (!status) return;
+
+  const validStatuses = ["APPLIED", "INTERVIEW", "HIRED", "REJECTED"];
+  const newStatus = status.trim().toUpperCase();
+
+  if (!validStatuses.includes(newStatus)) {
+    alert("Invalid status.");
+    return;
+  }
+
+  a.status = newStatus;
+
+  saveData();
+  renderAll();
+  notify("Application status updated.");
+}
+
+function resetApplicantForm() {
+  document.getElementById("applicantForm").reset();
+
+  document.querySelector('#applicantForm [name="id"]').value = "";
+
+  document.getElementById("applicantFormTitle").textContent =
+    "Add Applicant";
+
+  document.getElementById("saveApplicantButton").textContent =
+    "Save Applicant";
+}
+
+// JOB POSITION CREATE
+document.getElementById("positionForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const data = Object.fromEntries(new FormData(this).entries());
+
+  db.positions.push({
+    id: nextPositionId++,
+    title: data.title.trim(),
+    department: data.department.trim(),
+    type: data.type,
+    slots: Number(data.slots),
+    status: data.status
+  });
+
+  saveData();
+  this.reset();
+  renderAll();
+
+  notify("Job position added successfully.");
+});
+
+// JOB POSITION READ, SEARCH, UPDATE, DELETE
+function renderPositions() {
+  const search =
+    document.getElementById("positionSearch").value.toLowerCase();
+
+  const filtered = db.positions.filter(p =>
+    p.title.toLowerCase().includes(search) ||
+    p.department.toLowerCase().includes(search)
+  );
+
+  document.getElementById("positionsTable").innerHTML =
+    filtered.map(p => `
+      <tr>
+        <td>${esc(p.title)}</td>
+        <td>${esc(p.department)}</td>
+        <td>${esc(p.type)}</td>
+        <td>${esc(p.slots)}</td>
+        <td>${esc(p.status)}</td>
+        <td>
+          <button class="btn" onclick="editPosition(${p.id})">Edit</button>
+          <button class="btn btn-danger" onclick="deletePosition(${p.id})">Delete</button>
+        </td>
+      </tr>
+    `).join("") || '<tr><td colspan="6">No positions found.</td></tr>';
+}
+
+function editPosition(id) {
+  const p = db.positions.find(item => item.id === id);
+  if (!p) return;
+
+  const title = prompt("Position title:", p.title);
+  if (title === null) return;
+
+  const department = prompt("Department:", p.department);
+  if (department === null) return;
+
+  const slots = prompt("Available slots:", p.slots);
+  if (slots === null) return;
+
+  const status = prompt("Status: Open or Closed", p.status);
+  if (status === null) return;
+
+  if (!title.trim() || !department.trim() ||
+      !Number.isFinite(Number(slots)) || Number(slots) < 1 ||
+      !["Open", "Closed"].includes(status)) {
+    alert("Please enter valid position details.");
+    return;
+  }
+
+  Object.assign(p, {
+    title: title.trim(),
+    department: department.trim(),
+    slots: Number(slots),
+    status
+  });
+
+  saveData();
+  renderAll();
+  notify("Position updated.");
+}
+
+function deletePosition(id) {
+  const p = db.positions.find(item => item.id === id);
+  if (!p) return;
+
+  if (db.applicants.some(a => a.position === p.title)) {
+    alert("This position has applicants. Update or remove their applications first.");
+    return;
+  }
+
+  if (!confirm(`Delete ${p.title}?`)) return;
+
+  db.positions = db.positions.filter(item => item.id !== id);
+
+  saveData();
+  renderAll();
+  notify("Position deleted.");
+}
+
+// INTERVIEW CREATE
+document.getElementById("interviewForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const data = Object.fromEntries(new FormData(this).entries());
+  const applicant = db.applicants.find(
+    a => a.id === Number(data.applicantId)
+  );
+
+  if (!applicant) {
+    alert("Please add an applicant first.");
+    return;
+  }
+
+  db.interviews.push({
+    id: nextInterviewId++,
+    applicantId: applicant.id,
+    applicant: applicant.name,
+    position: applicant.position,
+    date: data.date,
+    time: data.time,
+    interviewer: data.interviewer.trim(),
+    location: data.location.trim()
+  });
+
+  if (applicant.status === "APPLIED") {
+    applicant.status = "INTERVIEW";
+  }
+
+  saveData();
+  this.reset();
+  renderAll();
+
+  notify("Interview scheduled successfully.");
+});
+
+// INTERVIEW READ AND DELETE
+function renderInterviews() {
+  document.getElementById("interviewsTable").innerHTML =
+    db.interviews.map(i => `
+      <tr>
+        <td>${esc(i.applicant)}</td>
+        <td>${esc(i.position)}</td>
+        <td>${esc(i.date)}</td>
+        <td>${esc(i.time)}</td>
+        <td>${esc(i.interviewer)}</td>
+        <td>
+          <button class="btn btn-danger"
+            onclick="deleteInterview(${i.id})">Delete</button>
+        </td>
+      </tr>
+    `).join("") ||
+    '<tr><td colspan="6">No interviews scheduled.</td></tr>';
+}
+
+function deleteInterview(id) {
+  if (!confirm("Delete this interview?")) return;
+
+  db.interviews = db.interviews.filter(i => i.id !== id);
+
+  saveData();
+  renderAll();
+  notify("Interview deleted.");
+}
+
+// APPLICANT PORTAL
+function renderPortal() {
+  const id = Number(document.getElementById("portalApplicant").value);
+
+  const a = db.applicants.find(item => item.id === id);
+  const container = document.getElementById("portalDetails");
+
+  if (!a) {
+    container.innerHTML =
+      '<div class="panel">No applicant selected.</div>';
+    return;
+  }
+
+  const interview = db.interviews.find(i => i.applicantId === a.id);
+
+  container.innerHTML = `
+    <div class="panel">
+      <h2>Your Application Journey</h2>
+      <p>Current application: <strong>${esc(a.position)}</strong></p>
+      <p>Name: ${esc(a.name)}</p>
+      <p>Status:
+        <span class="status ${esc(a.status)}">${esc(a.status)}</span>
+      </p>
+      <hr>
+      <h3>Your Profile</h3>
+      <p>Age: ${esc(a.age)}</p>
+      <p>Experience: ${esc(a.experience || "Not provided")}</p>
+      <p>Education: ${esc(a.education || "Not provided")}</p>
+      <p>Background: ${esc(a.background || "Not provided")}</p>
+      ${
+        interview ? `
+          <hr>
+          <h3>Upcoming Interview</h3>
+          <p>Date: ${esc(interview.date)}</p>
+          <p>Time: ${esc(interview.time)}</p>
+          <p>Interviewer: ${esc(interview.interviewer)}</p>
+          <p>Location: ${esc(interview.location || "To be announced")}</p>
+        ` : ""
+      }
+      ${
+        a.status === "REJECTED"
+          ? "<p>Your application was not selected.</p>"
+          : a.status === "HIRED"
+          ? "<p>Congratulations! Your application was successful.</p>"
+          : "<p>We are reviewing your application.</p>"
+      }
+    </div>
+  `;
+}
+
+// UPDATE SELECT BOXES
+function refreshSelects() {
+  const positionSelect = document.getElementById("applicantPosition");
+  const currentPosition = positionSelect.value;
+
+  positionSelect.innerHTML = db.positions
+    .filter(p => p.status === "Open")
+    .map(p => `<option value="${esc(p.title)}">${esc(p.title)}</option>`)
+    .join("");
+
+  if ([...positionSelect.options].some(o => o.value === currentPosition)) {
+    positionSelect.value = currentPosition;
+  }
+
+  const applicantOptions = db.applicants.map(a =>
+    `<option value="${a.id}">${esc(a.name)} — ${esc(a.position)}</option>`
+  ).join("");
+
+  document.getElementById("interviewApplicant").innerHTML =
+    applicantOptions;
+
+  const portal = document.getElementById("portalApplicant");
+  const previous = portal.value;
+
+  portal.innerHTML = applicantOptions;
+
+  if ([...portal.options].some(o => o.value === previous)) {
+    portal.value = previous;
+  }
+
+  renderPortal();
+}
+
+// REFRESH ALL VIEWS
+function renderAll() {
+  updateDashboard();
+  renderApplicants();
+  renderPositions();
+  renderInterviews();
+  refreshSelects();
+}
+
+// INITIALIZE THE WEBSITE
+renderAll();
+</script>
+
+</body>
+</html>
